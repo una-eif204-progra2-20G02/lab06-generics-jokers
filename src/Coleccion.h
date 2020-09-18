@@ -2,9 +2,11 @@
 // Created by dayan on 17/9/2020.
 //
 
-#ifndef MY_PROJECT_NAME_VECTOR_H
-#define MY_PROJECT_NAME_VECTOR_H
-
+#ifndef MY_PROJECT_NAME_COLECCION_H
+#define MY_PROJECT_NAME_COLECCION_H
+#include<sstream>
+#include<iostream>
+using namespace std;
 template<class T>
 class Coleccion {
 public:
@@ -12,7 +14,6 @@ public:
     int _k;
     T** _v;
 public:
-
     Coleccion(int = 20);
     Coleccion(Coleccion&);
     virtual ~Coleccion();
@@ -22,7 +23,6 @@ public:
     virtual string toString() const;
     Coleccion& operator=(Coleccion&);
 };
-
 template <class T>
 Coleccion<T>::Coleccion(int n) : _n(n), _k(0), _v(new T*[n]) {
     for (int i = 0; i < _n; i++)
@@ -87,7 +87,7 @@ void Coleccion<T>::agregar(T* x) {
 }
 //--------------------------------------------
 template <class T>
-std::string Coleccion<T>::toString() const {
+string Coleccion<T>:: toString() const {
     stringstream r;
     r << "[";
     for (int i = 0; i < _k; i++) {
