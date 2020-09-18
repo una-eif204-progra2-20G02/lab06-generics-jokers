@@ -3,7 +3,7 @@
 //
 
 #include "Medicamento.h"
-edicamento::Medicamento(string nombreMedicamento, double dosis, int precio, double nivelEfectividad,int annioVencimiento)
+Medicamento::Medicamento(string nombreMedicamento, double dosis, int precio, double nivelEfectividad,int annioVencimiento)
 {
 this->nombreMedicamento=nombreMedicamento;
 this->dosis=dosis;

@@ -13,35 +13,33 @@ public:
     T** _v;
 public:
 
-    coleccion(int = 20);
-    coleccion(coleccion&);
-    virtual ~coleccion();
+    Coleccion(int = 20);
+    Coleccion(Coleccion&);
+    virtual ~Coleccion();
     virtual void agregar(T*);
     virtual bool buscar(T* );
     virtual bool eliminar(T*);
     virtual string toString() const;
-    coleccion& operator=(coleccion&);
+    Coleccion& operator=(Coleccion&);
 };
 
 template <class T>
-coleccion<T>::coleccion(int n) : _n(n), _k(0), _v(new T*[n]) {
+Coleccion<T>::Coleccion(int n) : _n(n), _k(0), _v(new T*[n]) {
     for (int i = 0; i < _n; i++)
     {
         _v[i] = NULL;
     }
-}//--------------------------------------------
+}
 template <class T>
-coleccion<T>::coleccion(coleccion&c) {
+Coleccion<T>::Coleccion(Coleccion&c) {
 
-    // creamos nueva memoria y copiamos los elementos
     _k = c._k;
     _n = c._n;
     _v = new T*[c._n];
 
     for (int i = 0; i < c._k; i++)
     {
-        T *x = new T(* (c._v[i]));// si el elemento fuera un objeto, se estaria
-        // llamando al constructor de copia por defecto de la clase.
+        T *x = new T(* (c._v[i]));
         _v[i] = x;
 
 
@@ -50,7 +48,7 @@ coleccion<T>::coleccion(coleccion&c) {
 }
 //----------------------------------------------
 template <class T>
-coleccion<T>& coleccion<T>::operator=(coleccion& c)
+Coleccion<T>& Coleccion<T>::operator=(Coleccion& c)
 {
 
     for (int i = 0; i < _n; i++)
@@ -59,15 +57,13 @@ coleccion<T>& coleccion<T>::operator=(coleccion& c)
     }
     delete[]_v;
 
-    // creamos nueva memoria y copiamos los elementos
     _k = c._k;
     _n = c._n;
     _v = new T*[c._n];
 
     for (int i = 0; i < c._k; i++)
     {
-        T *x = new T(*(c._v[i]));// si el elemento fuera un objeto, se estaria
-        // llamando al constructor de copia por defecto de la clase.
+        T *x = new T(*(c._v[i]));
         _v[i] = x;
     }
 
@@ -75,7 +71,7 @@ coleccion<T>& coleccion<T>::operator=(coleccion& c)
 }
 //--------------------------------------------
 template <class T>
-coleccion<T>::~coleccion() {
+Coleccion<T>::~Coleccion() {
     for (int i = 0; i < _k; i++)
     {
         delete _v[i];
@@ -84,24 +80,20 @@ coleccion<T>::~coleccion() {
 }
 //--------------------------------------------
 template <class T>
-void coleccion<T>::agregar(T* x) {
+void Coleccion<T>::agregar(T* x) {
     if (_k < _n) {
         _v[_k++] = x;
     }
 }
 //--------------------------------------------
 template <class T>
-string coleccion<T>::toString() const {
+std::string Coleccion<T>::toString() const {
     stringstream r;
     r << "[";
     for (int i = 0; i < _k; i++) {
         if (i > 0) {
             r << ", ";
         }
-
-        // Esta operacion no es valida para cualquier valor de T,
-        // sino solamente para aquellos donde estan definido
-        // el operador <<.
 
         r << *_v[i];
     }
@@ -111,7 +103,7 @@ string coleccion<T>::toString() const {
 
 //----------------------------------------------
 template <class T>
-bool coleccion<T>::buscar(T* aux) {
+bool Coleccion<T>::buscar(T* aux) {
     for (int i = 0; i < _k; i++)
     {
         if (*(aux) == *(_v[i]))
@@ -124,8 +116,8 @@ bool coleccion<T>::buscar(T* aux) {
 
 //----------------------------------------------
 template <class T>
-bool coleccion<T>::eliminar(T* aux)
-{    // si fuera el ultimo
+bool Coleccion<T>::eliminar(T* aux)
+{
 
     if (*(_v[_k - 1]) == (*aux))
     {
@@ -134,7 +126,6 @@ bool coleccion<T>::eliminar(T* aux)
         _k--;
         return true;
     }
-    // si no fuera el ultimo implica corrimiento
     int pos = -1;
 
     for (int i = 0; i<_k - 1; i++)
@@ -148,7 +139,7 @@ bool coleccion<T>::eliminar(T* aux)
     if (pos != -1)
     {
         delete _v[pos];
-        for (int j = pos; j<_k-1; j++)// hacemos el corrimiento
+        for (int j = pos; j<_k-1; j++)
         {
             _v[j] = _v[j + 1];
         }
@@ -159,7 +150,7 @@ bool coleccion<T>::eliminar(T* aux)
 
     return false;
 }
-};
+
 
 
 
